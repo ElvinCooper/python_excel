@@ -1,10 +1,10 @@
-# AutoExcel - Automatización de Excel con Python
+# AutoExcel RD - Automatización de Excel con Python
 
 Elimina las tareas manuales y repetitivas en Excel. Ahorra más de 20 horas de trabajo mensual con herramientas personalizadas y cero instalación.
 
-## ¿Qué es AutoExcel?
+## ¿Qué es AutoExcel RD?
 
-AutoExcel es un servicio de desarrollo de automatizaciones a medida para Excel usando Python. Creamos herramientas que transforman procesos manuales (copiar, pegar, consolidar, formatear) en ejecuciones de un solo clic.
+AutoExcel RD es un servicio de desarrollo de automatizaciones a medida para Excel usando Python. Creamos herramientas que transforman procesos manuales (copiar, pegar, consolidar, formatear) en ejecuciones de un solo clic.
 
 ## Problema que resuelve
 
