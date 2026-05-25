@@ -45,12 +45,16 @@
     scroll-behavior: smooth;
 }
 
+html, body {
+    overflow-x: hidden;
+    width: 100%;
+}
+
 body {
     background-color: var(--bg-primary);
     color: var(--text-main);
     font-family: var(--font-body);
     line-height: 1.6;
-    overflow-x: hidden;
     position: relative;
 }
 
@@ -195,6 +199,125 @@ nav {
     color: var(--accent-cyan);
 }
 
+/* Hamburger Menu Button */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-glass);
+    border-radius: 10px;
+    cursor: pointer;
+    padding: 8px;
+    z-index: 110;
+    transition: var(--transition-fast);
+}
+
+.hamburger:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--accent-cyan);
+}
+
+.hamburger-line {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--text-main);
+    border-radius: 4px;
+    transition: var(--transition-smooth);
+    transform-origin: center;
+}
+
+/* Hamburger active state (X shape) */
+.hamburger.active .hamburger-line:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+
+.hamburger.active .hamburger-line:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+}
+
+.hamburger.active .hamburger-line:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
+/* Mobile Navigation Overlay */
+.mobile-nav-overlay {
+    display: flex;
+    position: fixed;
+    inset: 0;
+    background: rgba(10, 12, 16, 0.92);
+    backdrop-filter: blur(20px);
+    z-index: 90;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+.mobile-nav-overlay.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: all;
+}
+
+.mobile-nav-overlay a {
+    color: var(--text-main);
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 600;
+    text-decoration: none;
+    padding: 0.75rem 2rem;
+    border-radius: 12px;
+    transition: var(--transition-fast);
+    width: 80%;
+    max-width: 300px;
+    text-align: center;
+}
+
+.mobile-nav-overlay a:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--accent-cyan);
+}
+
+.mobile-nav-divider {
+    width: 60px;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.1);
+    margin: 0.5rem 0;
+}
+
+.mobile-nav-whatsapp {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background: #25D366 !important;
+    color: #fff !important;
+    border: none !important;
+    box-shadow: 0 0 20px rgba(37, 211, 102, 0.3);
+}
+
+.mobile-nav-whatsapp:hover {
+    background: #20ba56 !important;
+    color: #fff !important;
+    box-shadow: 0 0 30px rgba(37, 211, 102, 0.5);
+    transform: scale(1.05);
+}
+
+.mobile-nav-whatsapp svg {
+    flex-shrink: 0;
+}
+
 /* Custom Buttons */
 .btn {
     display: inline-flex;
@@ -320,6 +443,7 @@ section {
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
 }
 
 .hero-mockup-container {
@@ -1036,15 +1160,38 @@ footer {
     }
     
     .nav-links {
-        display: none; /* Can expand to mobile menu or keep simple */
+        display: none;
+    }
+
+    .hamburger {
+        display: flex;
     }
     
     .hero-content h1 {
         font-size: 2.8rem;
     }
     
+    .hero-visual {
+        max-width: 100%;
+        overflow: hidden;
+    }
+
+    .hero-mockup-container {
+        max-width: 100%;
+        padding: 1rem;
+    }
+
+    .mockup-ui {
+        font-size: 0.65rem;
+        padding: 0.75rem;
+    }
+
     .split-cards {
         grid-template-columns: 1fr;
+    }
+    
+    .glass-card {
+        padding: 2rem;
     }
     
     .steps-container {
@@ -1064,12 +1211,298 @@ footer {
     .price-card.featured:hover {
         transform: translateY(-5px);
     }
+
+    .price-card {
+        padding: 2rem;
+    }
     
     .section-header h2 {
         font-size: 2rem;
     }
-    
+
+    .calc-inputs {
+        padding: 1.5rem;
+    }
+
+    .result-number {
+        font-size: 2.8rem;
+    }
+
+    .cta-box {
+        padding: 3rem 2rem;
+    }
+
     .cta-box h2 {
         font-size: 2.2rem;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .ambient-glow {
+        width: 300px;
+        height: 300px;
+    }
+
+    .glow-cyan {
+        top: 0;
+        right: -50px;
+    }
+
+    .glow-purple {
+        bottom: -100px;
+        left: -50px;
+    }
+}
+
+@media (max-width: 480px) {
+    section {
+        padding: 4rem 5% 3rem 5%;
+    }
+
+    .hero {
+        padding-top: 7rem;
+        min-height: auto;
+        gap: 2rem;
+    }
+
+    .hero-badge {
+        font-size: 0.7rem;
+        padding: 0.35rem 0.75rem;
+    }
+
+    .hero-content h1 {
+        font-size: 1.8rem;
+    }
+
+    .hero-content p {
+        font-size: 0.95rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .hero-cta {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.75rem;
+    }
+
+    .hero-cta .btn {
+        width: 100%;
+        max-width: 280px;
+    }
+
+    .hero-mockup-container {
+        padding: 0.75rem;
+        border-radius: 12px;
+    }
+
+    .window-header {
+        margin-bottom: 0.75rem;
+        padding-bottom: 0.5rem;
+    }
+
+    .dot {
+        width: 8px;
+        height: 8px;
+    }
+
+    .window-title {
+        font-size: 0.7rem;
+    }
+
+    .mockup-ui {
+        font-size: 0.55rem;
+        padding: 0.6rem;
+    }
+
+    .section-header {
+        margin-bottom: 2.5rem;
+    }
+
+    .section-header h2 {
+        font-size: 1.5rem;
+    }
+
+    .section-header p {
+        font-size: 0.95rem;
+    }
+
+    .glass-card {
+        padding: 1.5rem;
+        border-radius: 16px;
+    }
+
+    .card-title {
+        font-size: 1.35rem;
+    }
+
+    .bullet-list li {
+        font-size: 0.9rem;
+    }
+
+    .step-number {
+        width: 50px;
+        height: 50px;
+        font-size: 1.25rem;
+    }
+
+    .step-title {
+        font-size: 1.15rem;
+    }
+
+    .step-card p {
+        font-size: 0.9rem;
+    }
+
+    .step-card {
+        padding: 0 1rem;
+    }
+
+    .calculator-wrapper {
+        gap: 2rem;
+    }
+
+    .calc-inputs {
+        padding: 1.25rem;
+        border-radius: 16px;
+    }
+
+    .slider-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .slider-header {
+        font-size: 0.85rem;
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+
+    input[type="range"] {
+        height: 8px;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+        width: 26px;
+        height: 26px;
+    }
+
+    .calc-results {
+        gap: 1rem;
+    }
+
+    .result-card {
+        padding: 1.25rem;
+    }
+
+    .result-number {
+        font-size: 2rem;
+    }
+
+    .result-lbl {
+        font-size: 0.8rem;
+    }
+
+    .solutions-grid {
+        gap: 1.25rem;
+    }
+
+    .solution-card {
+        padding: 1.5rem;
+    }
+
+    .sol-title {
+        font-size: 1.15rem;
+    }
+
+    .pricing-grid {
+        gap: 1.25rem;
+    }
+
+    .price-card {
+        padding: 1.5rem;
+    }
+
+    .price-number {
+        font-size: 2.2rem;
+    }
+
+    .plan-features li {
+        font-size: 0.82rem;
+    }
+
+    .faq-question {
+        padding: 1rem;
+        font-size: 1rem;
+    }
+
+    .faq-answer {
+        font-size: 0.88rem;
+    }
+
+    .faq-item.active .faq-answer {
+        padding: 0 1rem 1rem 1rem;
+    }
+
+    .cta-section {
+        padding: 5rem 5%;
+    }
+
+    .cta-box {
+        padding: 2.5rem 1.25rem;
+        border-radius: 20px;
+    }
+
+    .cta-box h2 {
+        font-size: 1.6rem;
+    }
+
+    .cta-box p {
+        font-size: 0.95rem;
+    }
+
+    .btn {
+        padding: 0.65rem 1.5rem;
+        font-size: 0.85rem;
+    }
+
+    .btn-lg {
+        padding: 0.85rem 1.5rem;
+        font-size: 0.9rem;
+        width: 100%;
+        max-width: 320px;
+    }
+
+    footer {
+        padding: 3rem 5% 2rem 5%;
+    }
+
+    .footer-copy {
+        font-size: 0.8rem;
+    }
+
+    .ambient-glow {
+        width: 200px;
+        height: 200px;
+    }
+
+    .glow-cyan {
+        top: 50px;
+        right: -80px;
+    }
+
+    .glow-purple {
+        bottom: -50px;
+        left: -80px;
+    }
+
+    .mobile-nav-overlay a {
+        font-size: 1.25rem;
+        padding: 0.6rem 1.5rem;
+    }
+
+    #nav-cta-btn {
+        display: none;
     }
 }

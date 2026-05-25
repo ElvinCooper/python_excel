@@ -14,7 +14,56 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // 2. REVEAL ON SCROLL ANIMATION
+    // 2. MOBILE HAMBURGER MENU
+    const hamburger = document.getElementById('hamburger');
+    const mobileOverlay = document.getElementById('mobile-nav-overlay');
+    const mobileLinks = mobileOverlay.querySelectorAll('a');
+
+    function closeMobileMenu() {
+        hamburger.classList.remove('active');
+        mobileOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    function openMobileMenu() {
+        hamburger.classList.add('active');
+        mobileOverlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    if (hamburger) {
+        hamburger.addEventListener('click', () => {
+            if (mobileOverlay.classList.contains('active')) {
+                closeMobileMenu();
+            } else {
+                openMobileMenu();
+            }
+        });
+    }
+
+    // Close menu when clicking a link
+    mobileLinks.forEach(link => {
+        link.addEventListener('click', closeMobileMenu);
+    });
+
+    // Close menu when clicking outside the links (on the overlay itself)
+    if (mobileOverlay) {
+        mobileOverlay.addEventListener('click', (e) => {
+            if (e.target === mobileOverlay) {
+                closeMobileMenu();
+            }
+        });
+    }
+
+    // Close menu on Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mobileOverlay.classList.contains('active')) {
+            closeMobileMenu();
+        }
+    });
+
+    // 3. REVEAL ON SCROLL ANIMATION
+
     const revealElements = document.querySelectorAll('.reveal');
     
     const revealOnScroll = new IntersectionObserver((entries, observer) => {
@@ -33,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
         revealOnScroll.observe(el);
     });
 
-    // 3. INTERACTIVE SAVINGS CALCULATOR
+    // 4. INTERACTIVE SAVINGS CALCULATOR
     const sliderHours = document.getElementById('slider-hours');
     const sliderRate = document.getElementById('slider-rate');
     const valHours = document.getElementById('val-hours');
